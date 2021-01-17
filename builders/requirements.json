@@ -1,0 +1,59 @@
+{
+    "modules": [
+        {
+            "name": "eval",
+            "requirements": [
+                "util"
+            ]
+        },
+        {
+            "name": "akinator",
+            "requirements": [
+                "aki-api"
+            ]
+        },
+        {
+            "name": "chat",
+            "requirements": [
+                "cleverbot-free"
+            ]
+        },
+        {
+            "name": "owofy",
+            "requirements": [
+                "owofy"
+            ]
+        },
+        {
+            "name": "rip",
+            "requirements": [
+                "canvas",
+                "canvas-text-wrapper"
+            ]
+        },
+        {
+            "name": "uno",
+            "requirements": [
+                "card-deck"
+            ]
+        },
+        {
+            "name": "backup",
+            "requirements": [
+                "discord-backup"
+            ]
+        },
+        {
+            "name": "slots",
+            "requirements": [
+                "grapheme-splitter"
+            ]
+        },
+        {
+            "name": "trivia",
+            "requirements": [
+                "node-superfetch"
+            ]
+        }
+    ]
+}
