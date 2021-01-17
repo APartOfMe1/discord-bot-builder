@@ -4,7 +4,7 @@ The easiest way to create a custom discord.js bot!
 
 ## Installation
 
-- Download and unzip the latest release
+- Download and unzip the [latest release](https://github.com/APartOfMe1/discord-bot-builder/releases/latest)
 - Install [node.js](https://nodejs.org/en/download/)
 - Open a command prompt in the release folder
 
