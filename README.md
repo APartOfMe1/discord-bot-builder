@@ -17,4 +17,3 @@ npm install
 ```bash
 node builder.js
 ```
-[MIT](https://choosealicense.com/licenses/mit/)
