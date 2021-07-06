@@ -23,7 +23,7 @@ module.exports = {
             credits = 500;
         };
 
-        client.credits.ensure(msg.author.id, { //Set the default settings for credits
+        client.db.credits.ensure(msg.author.id, { //Set the default settings for credits
             user: msg.author.id,
             credits: 0,
             streak: 0,
@@ -31,11 +31,11 @@ module.exports = {
             totaldailies: 0
         });
 
-        if (client.credits.get(msg.author.id, "credits") < credits) { //Check to see if the user has enough credits to play
+        if (client.db.credits.get(msg.author.id, "credits") < credits) { //Check to see if the user has enough credits to play
             return msg.channel.send("You don't have enough credits!");
         };
 
-        client.credits.set(msg.author.id, client.credits.get(msg.author.id, "credits") - credits, "credits"); //Remove the specified amount of credits from the user's account
+        client.db.credits.set(msg.author.id, client.db.credits.get(msg.author.id, "credits") - credits, "credits"); //Remove the specified amount of credits from the user's account
 
         msg.channel.send(`You used **${credits}** credits to spin the slot machine!`); //Send a success message
 
@@ -51,7 +51,7 @@ module.exports = {
                     .setColor(config.embedColor)
                     .setTitle("You spun the slot machine!")
                     .addField("Machine", `\`\`\`${finalSpin.join("")}\`\`\``, true)
-                    .addField("Possible Outcomes", `A match is a row of 3 of the same emoji. The match can be vertical, horizontal, or diagonal. \n\`\`\` 1 match:   ${credits * 1 * 2}\n 2 matches: ${credits * 2 * 2}\n 3 matches: ${credits * 3 * 2}\n 4 matches: ${credits * 4 * 2}\n 5 matches: ${credits * 5 * 2}\n 6 matches: ${credits * 6 * 2}\n 7 matches: ${credits * 7 * 2}\n 8 matches: ${credits * 8 * 2}\`\`\``, true)
+                    .addField("Possible Outcomes", `A match is a row of 3 of the same icon. The match can be vertical, horizontal, or diagonal. \n\`\`\` 1 match:   ${credits * 1 * 2}\n 2 matches: ${credits * 2 * 2}\n 3 matches: ${credits * 3 * 2}\n 4 matches: ${credits * 4 * 2}\n 5 matches: ${credits * 5 * 2}\n 6 matches: ${credits * 6 * 2}\n 7 matches: ${credits * 7 * 2}\n 8 matches: ${credits * 8 * 2}\`\`\``, true);
 
                 slotMsg.edit({ //Edit the message with the spin
                     embed: slotEmb
@@ -67,7 +67,7 @@ module.exports = {
                     .setColor(config.embedColor)
                     .setTitle("You spun the slot machine!")
                     .addField("Machine", `\`\`\`${spin().join("")}\`\`\``, true)
-                    .addField("Possible Outcomes", `A match is a row of 3 of the same emoji. The match can be vertical, horizontal, or diagonal. \n\`\`\` 1 match:   ${credits * 1 * 2}\n 2 matches: ${credits * 2 * 2}\n 3 matches: ${credits * 3 * 2}\n 4 matches: ${credits * 4 * 2}\n 5 matches: ${credits * 5 * 2}\n 6 matches: ${credits * 6 * 2}\n 7 matches: ${credits * 7 * 2}\n 8 matches: ${credits * 8 * 2}\`\`\``, true)
+                    .addField("Possible Outcomes", `A match is a row of 3 of the same icon. The match can be vertical, horizontal, or diagonal. \n\`\`\` 1 match:   ${credits * 1 * 2}\n 2 matches: ${credits * 2 * 2}\n 3 matches: ${credits * 3 * 2}\n 4 matches: ${credits * 4 * 2}\n 5 matches: ${credits * 5 * 2}\n 6 matches: ${credits * 6 * 2}\n 7 matches: ${credits * 7 * 2}\n 8 matches: ${credits * 8 * 2}\`\`\``, true)
 
                 slotMsg.edit({ //Edit the message with a new spin
                     embed: slotEmb
@@ -167,7 +167,7 @@ module.exports = {
 
             var totalWon = credits * hasWon * 2; //Calculate the total amount of credits won
 
-            client.credits.set(msg.author.id, client.credits.get(msg.author.id, "credits") + totalWon, "credits"); //Set the credits
+            client.db.credits.set(msg.author.id, client.db.credits.get(msg.author.id, "credits") + totalWon, "credits"); //Set the credits
 
             if (totalWon === 0) { //Check if no credits were given to make the message look nicer
                 totalWon = 'nothing';

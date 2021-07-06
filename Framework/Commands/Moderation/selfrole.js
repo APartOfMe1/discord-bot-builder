@@ -4,11 +4,11 @@ const config = require("../../config/config.json");
 module.exports = {
     name: 'selfrole',
     description: 'Add a role to yourself',
-    aliases: ["selfroles"],
+    aliases: ["selfroles", "iam"],
     category: 'Moderation',
     cooldown: 5000,
     async execute(msg, args) {
-        client.selfroles.ensure(msg.guild.id, {
+        client.db.selfroles.ensure(msg.guild.id, {
             selfroles: [],
             autorole: "Not set"
         });
@@ -27,7 +27,7 @@ module.exports = {
             return fail();
         };
 
-        if (!client.selfroles.includes(msg.guild.id, toAdd.id, "selfroles")) { //Check if the enmap includes the given role
+        if (!client.db.selfroles.includes(msg.guild.id, toAdd.id, "selfroles")) { //Check if the enmap includes the given role
             return fail();
         };
 
@@ -50,7 +50,7 @@ module.exports = {
         };
 
         function fail() {
-            var getAll = client.selfroles.get(msg.guild.id, "selfroles");
+            var getAll = client.db.selfroles.get(msg.guild.id, "selfroles");
 
             var roleList = [];
 

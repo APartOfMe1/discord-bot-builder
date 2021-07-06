@@ -49,9 +49,8 @@ module.exports = {
       .addField(`Reason`, reason);
 
     await ban.ban({
-        reason: reason
-      })
-      .catch(error => msg.reply(`Sorry, I couldn't ban because of: ${error}`));
+      reason: reason
+    }).catch(error => msg.reply(`Sorry, I couldn't ban because of: ${error}`));
 
     return msg.channel.send({
       embed

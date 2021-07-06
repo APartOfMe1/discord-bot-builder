@@ -20,7 +20,7 @@ module.exports = {
             chatters[msg.channel.id].push(msg.author.id); //Add the user to the array
 
             const startEmb = new Discord.MessageEmbed()
-                .setColor(config.errorchannel)
+                .setColor(config.embedColor)
                 .setAuthor(`${msg.guild.members.cache.get(msg.author.id).displayName} started a chat. Say hi!`, msg.author.avatarURL())
                 .setDescription("Other members can join the conversation by running the command themselves! Use the command again to leave the conversation")
                 .setFooter(`${config.name} | The conversation will automatically time out in 30 minutes`, client.user.avatarURL());
@@ -54,7 +54,7 @@ module.exports = {
             });
 
             collector.on("collect", m => {
-                if (m.content.toLowerCase() === `${config.prefix}chat` || m.content.toLowerCase() === `${client.settings.get(msg.guild.id).prefix}chat`) {
+                if (m.content.toLowerCase() === `${config.prefix}chat` || m.content.toLowerCase() === `${client.db.settings.get(msg.guild.id).prefix}chat`) {
                     removeUser(m.author);
 
                     if (chatters[msg.channel.id].length < 1) { //End the chat if there's no one left
@@ -76,7 +76,7 @@ module.exports = {
                     const responseEmb = new Discord.MessageEmbed()
                         .setColor(config.embedColor)
                         .setDescription(response)
-                        .setFooter(`${config.name} | Use "${client.settings.get(msg.guild.id).prefix}chat" to join/leave the conversation!`, client.user.avatarURL());
+                        .setFooter(`${config.name} | Use "${client.db.settings.get(msg.guild.id).prefix}chat" to join/leave the conversation!`, client.user.avatarURL());
 
                     return msg.channel.send({
                         embed: responseEmb

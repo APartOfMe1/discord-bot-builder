@@ -19,14 +19,14 @@ module.exports = {
             user = msg.author;
         };
 
-        client.points.ensure(`${msg.guild.id}-${user.id}`, { //Ensure that the enmap includes the user and has the default settings
+        client.db.points.ensure(`${msg.guild.id}-${user.id}`, { //Ensure that the enmap includes the user and has the default settings
             user: msg.author.id,
             guild: msg.guild.id,
             points: 0,
             level: 1
         });
 
-        client.credits.ensure(user.id, { //Set the default settings for credits
+        client.db.credits.ensure(user.id, { //Set the default settings for credits
             user: msg.author.id,
             credits: 0,
             streak: 0,
@@ -39,9 +39,9 @@ module.exports = {
         const embed = new Discord.MessageEmbed() //Format the message
             .setColor(config.embedColor)
             .setTitle(`**${msg.guild.members.cache.get(user.id).displayName}'s** stats`)
-            .addField("Points", `\`\`\`${client.points.get(key, "points")} (level: ${client.points.get(key, "level")})\`\`\``, true)
-            .addField("Credits", `\`\`\`${client.credits.get(user.id, "credits")} (streak: ${client.credits.get(user.id, "streak")})\`\`\``, true)
-            .addField("All-Time Stats", `\`\`\`Total times daily was used: ${client.credits.get(user.id, "totaldailies")} \n\nAll-time credits: ${client.credits.get(user.id, "totalcredits")}\`\`\``);
+            .addField("Points", `\`\`\`${client.db.points.get(key, "points")} (level: ${client.db.points.get(key, "level")})\`\`\``, true)
+            .addField("Credits", `\`\`\`${client.db.credits.get(user.id, "credits")} (streak: ${client.db.credits.get(user.id, "streak")})\`\`\``, true)
+            .addField("All-Time Stats", `\`\`\`Total times daily was used: ${client.db.credits.get(user.id, "totaldailies")} \n\nAll-time credits: ${client.db.credits.get(user.id, "totalcredits")}\`\`\``);
 
         return msg.channel.send({
             embed

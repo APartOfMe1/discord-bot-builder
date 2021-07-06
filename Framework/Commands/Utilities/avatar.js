@@ -22,6 +22,7 @@ module.exports = {
 
         const embed = new Discord.MessageEmbed() //Set an embed with the avatar as an attachment
             .setTitle(`${client.users.cache.get(member.id).username}'s avatar!`)
+            .setColor(config.embedColor)
             .setDescription(`[Click here for a direct link](${client.users.cache.get(member.id).avatarURL({
                 dynamic: true,
                 format: 'png',
@@ -31,8 +32,7 @@ module.exports = {
                 dynamic: true,
                 format: 'png',
                 size: 1024
-            }))
-            .setColor(config.embedColor);
+            }));
 
         await genMsg.edit(``, { //Edit the message
             embed

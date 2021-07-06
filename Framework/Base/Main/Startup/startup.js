@@ -4,12 +4,12 @@ const chalk = require("chalk");
 const klaw = require('klaw');
 
 module.exports = {
-    addCommands(filepath) {
+    async addCommands(filepath) {
         client.commands = new Discord.Collection(); //A list of all commands
 
         client.categories = new Discord.Collection(); //A list of all categories
 
-        klaw(filepath) //Run through the commands folder
+        klaw(filepath) //Run through the commands folder and all subfolders
             .on('data', c => {
                 if (!c.path.endsWith(".js")) { //Ignore non-js files
                     return;
@@ -25,7 +25,7 @@ module.exports = {
 
                 client.commands.set(commandName[0], command); //Add the command to the list
 
-                //console.log(`Loaded ${commandName[0]}`); //Enable if you want spam lul
+                //console.log(`Loaded ${commandName[0]}`); //Used for testing. Enable if you want spam in your console on startup
             })
             .on('end', () => {
                 console.log(chalk.keyword('yellow')(`Successfully loaded ${client.commands.size} commands and ${client.categories.size} categories!`));
@@ -36,29 +36,19 @@ module.exports = {
 
     finalize() {
         setInterval(() => { //Rotate through custom statuses
-            const index = Math.floor(Math.random() * config.status.length);
+            if (config.status && Array.isArray(config.status)) {
+                const index = Math.floor(Math.random() * config.status.length);
 
-            var activity = "";
+                const activity = config.status[index].replace("{users}", client.users.cache.size).replace("{guilds}", client.guilds.cache.size);
 
-            switch (index) {
-                case 0: //If the status is the total guild count
-                    activity = `with ${client.guilds.cache.size} guilds`;
-                    break;
-
-                case 1: //If the status is the total user count
-                    activity = `with ${client.users.cache.size} users`;
-                    break;
-
-                default:
-                    activity = config.status[index];
-                    break;
+                client.user.setActivity(`${activity} | ${config.prefix}help for a list of commands!`); //Optional: add "| [${index + 1}]" to show which number it is. (Think mantaro)
             };
-
-            client.user.setActivity(`${activity} | ${config.prefix}help for a list of commands!`); //Optional: add "| [${index + 1}]" to show which number it is. (Think mantaro)
         }, 60000);
 
-        if (client.channels.cache.get(config.errorChannel)) {
-            client.channels.cache.get(config.errorChannel).send("I rebooted!"); //Send a message to a channel on reboot
+        if (client.channels.cache.get(config.errorChannel) && config.startupNotification === true) {
+            const ownerList = config.owners.map(u => ` <@${u}>`);
+
+            client.channels.cache.get(config.errorChannel).send(`${ownerList} I rebooted!`); //Send a message to a channel on reboot
         };
 
         console.log(chalk.keyword('green')(`I'm up and running!`)); //Send a message in the console on boot

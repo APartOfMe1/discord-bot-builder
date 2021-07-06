@@ -1,0 +1,13 @@
+There was an uncaught exception error. The details can be found below.
+
+SyntaxError: Unexpected token I in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at Request._callback (C:\Users\jorda\Desktop\Bots\EpixBot\handlers\Music\Url-Parser\url-parser.js:8:34)
+    at Request.self.callback (C:\Users\jorda\Desktop\Bots\EpixBot\node_modules\request\request.js:185:22)
+    at Request.emit (events.js:315:20)
+    at Request.<anonymous> (C:\Users\jorda\Desktop\Bots\EpixBot\node_modules\request\request.js:1154:10)
+    at Request.emit (events.js:315:20)
+    at IncomingMessage.<anonymous> (C:\Users\jorda\Desktop\Bots\EpixBot\node_modules\request\request.js:1076:12)
+    at Object.onceWrapper (events.js:421:28)
+    at IncomingMessage.emit (events.js:327:22)
+    at endReadableNT (internal/streams/readable.js:1327:12)

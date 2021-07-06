@@ -1,5 +1,3 @@
-const Discord = require('discord.js');
-const config = require("../../config/config.json");
 const klaw = require('klaw');
 
 module.exports = {

@@ -20,9 +20,9 @@ module.exports = {
         };
 
         if (lbToCheck === "global") {
-            var sorted = client.credits.array().sort((a, b) => b.credits - a.credits).splice((page * 10) - 10, (page * 10)); //Get the credits for the current page of users
+            var sorted = client.db.credits.array().sort((a, b) => b.credits - a.credits).splice((page * 10) - 10, (page * 10)); //Get the credits for the current page of users
         } else {
-            var sorted = client.points.filter(p => p.guild === msg.guild.id).array().sort((a, b) => b.points - a.points).splice((page * 10) - 10, (page * 10)); //Get the points of each member in the guild, sort by amount of points, and get the users specified by the page number
+            var sorted = client.db.points.filter(p => p.guild === msg.guild.id).array().sort((a, b) => b.points - a.points).splice((page * 10) - 10, (page * 10)); //Get the points of each member in the guild, sort by amount of points, and get the users specified by the page number
         };
 
         const top10 = []; //Create an empty array to store the guild member and point info

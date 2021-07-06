@@ -6,22 +6,14 @@ module.exports = {
     description: 'Shows this help command',
     category: 'Utilities',
     aliases: ['helpdm'],
-    usage: '`{prefix}help`, `{prefix}help <command>, `{prefix}help -all`, or `{prefix}help -dm`',
+    usage: '`{prefix}help`, `{prefix}help <command>`, `{prefix}help -all`, or `{prefix}help -dm`',
     examples: '`{prefix}help trivia`, `{prefix}help bal',
     async execute(msg, args) {
         if (args[0]) {
-            if (args[0].toLowerCase() === '-all') {
+            if (args[0].toLowerCase() === 'dm') {
                 var helpMsg = generateMsg();
 
-                return msg.channel.send(helpMsg.msg, {
-                    embed: helpMsg.embed
-                });
-            };
-
-            if (args[0].toLowerCase() === '-dm') {
-                var helpMsg = generateMsg();
-
-                msg.react('542760297870655488'); //React to the message to let the user know the message was successfully sent
+                msg.react("✅"); //React to the message to let the user know the message was successfully sent
 
                 return msg.author.send(helpMsg.msg, {
                     embed: helpMsg.embed
@@ -45,8 +37,8 @@ module.exports = {
                 cmdEmb.addField("Aliases", cmd.aliases.join(", "));
             };
 
-            if (client.settings.get(msg.guild.id).prefix) {
-                var prefix = client.settings.get(msg.guild.id).prefix;
+            if (client.db.settings.get(msg.guild.id).prefix) {
+                var prefix = client.db.settings.get(msg.guild.id).prefix;
             } else {
                 var prefix = config.prefix;
             };

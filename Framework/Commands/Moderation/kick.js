@@ -49,9 +49,8 @@ module.exports = {
       .addField(`Reason`, reason);
 
     await kick.kick(
-        reason
-      )
-      .catch(error => msg.reply(`Sorry, I couldn't kick because of: ${error}`));
+      reason
+    ).catch(error => msg.reply(`Sorry, I couldn't kick because of: ${error}`));
 
     return msg.channel.send({
       embed

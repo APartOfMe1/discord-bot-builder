@@ -1,14 +1,15 @@
+const Discord = require("discord.js");
 const config = require("../../../config/config.json");
 const cmdCooldown = new Set();
 
 module.exports = {
-    handleCommand(msg, command) {
+    handleCommand(msg) {
         const defaultSettings = {
             prefix: config.prefix,
             logs: "disabled"
         };
 
-        const customPrefix = client.settings.ensure(msg.guild.id, defaultSettings).prefix; //Get the server's custom prefix if available
+        const customPrefix = client.db.settings.ensure(msg.guild.id, defaultSettings).prefix; //Get the server's custom prefix if available
 
         const prefixes = [customPrefix, config.prefix]; //Define a list of available prefixes
 
@@ -42,9 +43,9 @@ module.exports = {
             return;
         };
 
-        client.disabledCommands.ensure(msg.guild.id, []); //Make sure that the enmap won't kill itself lol
+        client.db.disabledCommands.ensure(msg.guild.id, []); //Make sure that the enmap won't kill itself lol
 
-        if (client.disabledCommands.includes(msg.guild.id, cmdName)) { // If the command is disabled, ignore 
+        if (client.db.disabledCommands.includes(msg.guild.id, cmd.name)) { // If the command is disabled, ignore 
             return msg.channel.send(`**${cmdName}** is disabled`);
         };
 
@@ -67,7 +68,14 @@ module.exports = {
         };
 
         cmd.execute(msg, args).catch(e => { //Execute the command
-            msg.channel.send(`There was an error running that command! The information below has been sent to the developer \n\`\`\`js\n${e}\`\`\``); //Send an error if needed
+            const errEmb = new Discord.MessageEmbed()
+                .setColor(config.embedColor)
+                .setTitle(`There was an error running that command! The information below has been sent to the developer`)
+                .setDescription(`There was an error in ${msg.guild} (${msg.guild.id}) while running the command **${cmd.name}** \n\`\`\`js\n${e}\`\`\``);
+
+            msg.channel.send({ //Send an error if needed
+                embed: errEmb
+            });
 
             if (client.channels.cache.get(config.errorChannel)) {
                 client.channels.cache.get(config.errorChannel).send(`There was an error in ${msg.guild} (${msg.guild.id}) while running the command **${cmd.name}** \n\`\`\`js\n${e}\`\`\``); //Send an error to the log channel

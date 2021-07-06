@@ -17,13 +17,13 @@ module.exports = {
             return msg.reply("There were no credits specified");
         };
 
-        client.credits.ensure(user.id, { //Set the default settings for credits
+        client.db.credits.ensure(user.id, { //Set the default settings for credits
             user: user.id,
             credits: 0,
             streak: 0
         });
 
-        client.credits.set(user.id, credits, "credits"); //Set the credits
+        client.db.credits.set(user.id, credits, "credits"); //Set the credits
 
         return msg.channel.send(`**${user.tag}**'s credits have been set to **${credits}**`); //Send a success message
     },

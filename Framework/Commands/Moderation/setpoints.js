@@ -21,14 +21,14 @@ module.exports = {
             return msg.reply("There were no points specified");
         };
 
-        client.points.ensure(`${msg.guild.id}-${user.id}`, { //Make sure the user exists in the enmap
+        client.db.points.ensure(`${msg.guild.id}-${user.id}`, { //Make sure the user exists in the enmap
             user: user.id,
             guild: msg.guild.id,
             points: 0,
             level: 1
         });
 
-        client.points.set(`${msg.guild.id}-${user.id}`, points, "points"); //Set the points
+        client.db.points.set(`${msg.guild.id}-${user.id}`, points, "points"); //Set the points
 
         return msg.channel.send(`**${user.tag}**'s points have been set to **${points}**`); //Send a success message
 

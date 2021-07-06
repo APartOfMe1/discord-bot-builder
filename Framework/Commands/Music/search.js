@@ -9,7 +9,7 @@ module.exports = {
     cooldown: 2500,
     async execute(msg, args) {
         if (!msg.member.voice.channel) { //Make sure the user is in a VC
-            return msg.channel.send('I can\'t search for music if you\'re not in a voice channel!');
+            return msg.channel.send('You need to be in a voice channel!');
         };
 
         const perms = msg.member.voice.channel.permissionsFor(msg.client.user); //Get the bots' permissions for the current voice channel
@@ -41,18 +41,18 @@ module.exports = {
 
             var i = 0;
 
-            searchResults.items.forEach(song => { //Check each result
+            for (const song of searchResults.items) { //Check each result
                 if (song.title !== "Related to your search" && song.duration !== undefined) { //Make sure the entry isn't a "related search" thing
                     i++;
 
                     sortedResults.push({ //Add the video to the array
                         title: song.title,
-                        url: song.link,
+                        url: song.url,
                         duration: song.duration,
-                        formatted: `**${i}** | [${song.title}](${song.link}) | ${song.duration}`
+                        formatted: `**${i}** | [${song.title}](${song.url}) | ${song.duration}`
                     });
                 };
-            });
+            };
 
             const resultsEmb = new Discord.MessageEmbed()
                 .setTitle(`Results for "${args.join(" ")}"`)
@@ -78,7 +78,7 @@ module.exports = {
                 };
 
                 var result = sortedResults[collected.first().content - 1]; //Get the correct item in the array
-
+                
                 client.player.play(result.url, msg.member.voice.channel, msg.channel, msg.author); //Play the song / Add to the queue
 
                 searchMsg.delete(); //Delete the message

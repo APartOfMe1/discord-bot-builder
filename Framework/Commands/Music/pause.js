@@ -4,7 +4,7 @@ module.exports = {
     category: 'Music',
     async execute(msg, args) {
         if (!msg.member.voice.channel) { //Make sure the user is in a VC
-            return msg.channel.send('I can\'t pause music if you\'re not in a voice channel!');
+            return msg.channel.send('You need to be in a voice channel!');
         };
 
         client.player.pause(msg.guild.id).then(result => {

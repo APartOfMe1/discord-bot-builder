@@ -15,11 +15,18 @@ module.exports = {
                 .setAuthor("Now Playing")
                 .setTitle(nowPlaying.title)
                 .setURL(nowPlaying.url)
-                .setThumbnail(nowPlaying.thumbnail)
-                .setDescription(`${client.player.getTime(queue.channel.dispatcher.streamTime)} / ${client.player.getTime(client.player.hmsToMs(nowPlaying.duration))} \n\n${createSlider(queue.channel.dispatcher.streamTime, client.player.hmsToMs(nowPlaying.duration))}`);
+                .setThumbnail("attachment://thumbnail.png")
+                .setDescription(`${client.player.getTime(queue.channel.dispatcher.streamTime + queue.seekTime)} / ${client.player.getTime(client.player.hmsToMs(nowPlaying.duration))}\n\n${createSlider(queue.channel.dispatcher.streamTime + queue.seekTime, client.player.hmsToMs(nowPlaying.duration))}`)
+                .addField("Channel", nowPlaying.channel, true)
+                .addField("Requested By", nowPlaying.requestedBy, true)
+                .addField("Current Volume", `${queue.volume}/100`, true);
 
             return msg.channel.send({
-                embed
+                embed: embed,
+                files: [{
+                    attachment: nowPlaying.thumbnail,
+                    name: 'thumbnail.png'
+                }]
             });
         }).catch(err => {
             return msg.channel.send("No songs are currently playing!");

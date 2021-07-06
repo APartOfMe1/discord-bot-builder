@@ -35,7 +35,7 @@ module.exports = {
 
         const embed = new Discord.MessageEmbed() //Set up an embed and send it to the specified channel
             .setDescription(message)
-            .setColor("RANDOM");
+            .setColor(config.embedColor);
 
         return chnl.send({
             embed

@@ -1,0 +1,13 @@
+There was an uncaught exception error. The details can be found below.
+
+TypeError [ERR_INVALID_CALLBACK]: Callback must be a function. Received undefined
+    at makeCallback (fs.js:168:11)
+    at Object.unlink (fs.js:1199:14)
+    at StreamDispatcher.<anonymous> (C:\Users\jorda\Desktop\Bots\EpixBot\handlers\Music\music.js:564:24)
+    at StreamDispatcher.emit (events.js:327:22)
+    at finish (internal/streams/writable.js:657:10)
+    at finishMaybe (internal/streams/writable.js:644:9)
+    at internal/streams/writable.js:617:7
+    at StreamDispatcher._final (C:\Users\jorda\Desktop\Bots\EpixBot\node_modules\discord.js\src\client\voice\dispatcher\StreamDispatcher.js:248:5)
+    at callFinal (internal/streams/writable.js:610:10)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)

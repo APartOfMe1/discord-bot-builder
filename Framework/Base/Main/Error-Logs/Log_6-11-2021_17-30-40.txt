@@ -1,0 +1,8 @@
+There was an uncaught exception error. The details can be found below.
+
+TypeError [ERR_INVALID_ARG_TYPE]: The "args" argument must be of type object. Received type string ('C:\\Users\\jorda\\Deskto...)
+    at normalizeSpawnArguments (child_process.js:421:11)
+    at Object.spawn (child_process.js:551:13)
+    at Timeout._onTimeout (C:\Users\jorda\Desktop\Bots\EpixBot\commands\Administration\reboot.js:12:19)
+    at listOnTimeout (internal/timers.js:554:17)
+    at processTimers (internal/timers.js:497:7)

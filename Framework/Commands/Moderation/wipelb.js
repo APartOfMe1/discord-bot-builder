@@ -7,10 +7,10 @@ module.exports = {
             return msg.reply("You need administrator privledges to use this command!");
         };
 
-        const toRemove = client.points.filter(p => p.guild === msg.guild.id); //Get the users in the guild
+        const toRemove = client.db.points.filter(p => p.guild === msg.guild.id); //Get the users in the guild
 
         toRemove.forEach(data => { //Clear each member's points
-            client.points.delete(`${msg.guild.id}-${data.user}`);
+            client.db.points.delete(`${msg.guild.id}-${data.user}`);
         });
 
         return msg.channel.send(`${toRemove.size} users have been removed from the leaderboard and had their points reset`); //Send a success message

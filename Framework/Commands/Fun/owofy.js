@@ -1,4 +1,4 @@
-const owofy = require('owofy');
+const owofy = require('owoify-js').default;
 
 module.exports = {
     name: 'owofy',
@@ -11,7 +11,7 @@ module.exports = {
             await msg.channel.messages.fetch({ //Get the last message sent
                     limit: 2
                 }).then(message => {
-                    var text = owofy(message.last().content);
+                    var text = owofy(message.last().content, "uwu");
 
                     for (let i = 0; i < text.length; i += 2000) { //Split the message if it's over 2000 characters
                         var toSend = text.substring(i, Math.min(text.length, i + 2000));
@@ -25,7 +25,7 @@ module.exports = {
                     return msg.channel.send("I couldn't find the last message sent. Try running the command again!");
                 });
         } else {
-            var text = owofy(args.join(" "));
+            var text = owofy(args.join(" "), "uwu");
 
             for (let i = 0; i < text.length; i += 2000) { //Split the message if it's over 2000 characters
                 var toSend = text.substring(i, Math.min(text.length, i + 2000));

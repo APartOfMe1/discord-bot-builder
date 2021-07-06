@@ -1,0 +1,54 @@
+There was an uncaught exception error. The details can be found below.
+
+Error [ERR_UNHANDLED_ERROR]: Unhandled error. (ErrorEvent {
+  target: WebSocket {
+    _events: [Object: null prototype] {
+      open: [Function],
+      message: [Function],
+      close: [Function],
+      error: [Function]
+    },
+    _eventsCount: 4,
+    _maxListeners: undefined,
+    _binaryType: 'nodebuffer',
+    _closeCode: 1006,
+    _closeFrameReceived: false,
+    _closeFrameSent: false,
+    _closeMessage: '',
+    _closeTimer: null,
+    _extensions: {},
+    _protocol: '',
+    _readyState: 2,
+    _receiver: null,
+    _sender: null,
+    _socket: null,
+    _bufferedAmount: 0,
+    _isServer: false,
+    _redirects: 0,
+    _url: 'wss://us-west4531.discord.media/?v=4&encoding=json',
+    _req: null,
+    [Symbol(kCapture)]: false
+  },
+  type: 'error',
+  message: 'getaddrinfo ENOTFOUND us-west4531.discord.media',
+  error: Error: getaddrinfo ENOTFOUND us-west4531.discord.media
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:67:26) {
+    errno: -3008,
+    code: 'ENOTFOUND',
+    syscall: 'getaddrinfo',
+    hostname: 'us-west4531.discord.media'
+  }
+})
+    at VoiceConnection.emit (events.js:304:17)
+    at VoiceWebSocket.<anonymous> (C:\Users\jorda\Desktop\Bots\EpixBot\node_modules\discord.js\src\client\voice\VoiceConnection.js:422:32)
+    at VoiceWebSocket.emit (events.js:315:20)
+    at VoiceWebSocket.onError (C:\Users\jorda\Desktop\Bots\EpixBot\node_modules\discord.js\src\client\voice\networking\VoiceWebSocket.js:160:10)
+    at WebSocket.onError (C:\Users\jorda\Desktop\Bots\EpixBot\node_modules\ws\lib\event-target.js:140:16)
+    at WebSocket.emit (events.js:315:20)
+    at ClientRequest.<anonymous> (C:\Users\jorda\Desktop\Bots\EpixBot\node_modules\ws\lib\websocket.js:579:15)
+    at ClientRequest.emit (events.js:315:20)
+    at TLSSocket.socketErrorListener (_http_client.js:469:9)
+    at TLSSocket.emit (events.js:315:20)
+    at emitErrorNT (internal/streams/destroy.js:106:8)
+    at emitErrorCloseNT (internal/streams/destroy.js:74:3)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)

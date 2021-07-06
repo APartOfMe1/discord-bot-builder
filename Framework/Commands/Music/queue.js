@@ -17,8 +17,8 @@ module.exports = {
                 return msg.channel.send("Queue cleared!");
             }).catch(err => {
                 return msg.channel.send("There's nothing to clear!");
-            });         
-            
+            });
+
             return;
         };
 
