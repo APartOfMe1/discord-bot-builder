@@ -1,5 +1,4 @@
 const listRequirements = require("list-requirements");
-const reqs = require("list-requirements");
 
 // //Fancy loading animation
 // const frames = ["|", "/", "-", "\\"];
