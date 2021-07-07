@@ -1,5 +1,5 @@
-const klaw = require('klaw');
-const fs = require("fs");
+const listRequirements = require("list-requirements");
+const reqs = require("list-requirements");
 
 // //Fancy loading animation
 // const frames = ["|", "/", "-", "\\"];
@@ -16,45 +16,57 @@ const fs = require("fs");
 //     };
 // }, 50);
 
-const output = {};
+listRequirements("./Framework/Commands", {
+    outputLocation: "./",
+    filters: [
+        /fs/g,
+        /discord.js/g
+    ]
+}).then(output => {
+    console.log(output);
+});
 
-output.modules = [];
+// const output = {};
 
-klaw("./Framework/").on("data", c => {
-    if (!c.path.endsWith(".js")) {
-        return;
-    };
+// output.modules = [];
 
-    const name = c.path.split("\\").pop().split(".js")[0];
+// klaw("./Framework/").on("data", c => {
+//     if (!c.path.endsWith(".js")) {
+//         return;
+//     };
 
-    const cmdObj = {
-        "name": name,
-        "requirements": []
-    };
+//     const fullName = c.path.split("\\").pop();
 
-    const content = fs.readFileSync(c.path).toString().split("\n");
+//     const cmdObj = {
+//         "name": fullName.split(".js")[0],
+//         "fullName": fullName,
+//         "filePath": c.path,
+//         "requirements": []
+//     };
 
-    for (const line of content) {
-        if (RegExp(/(= |=)(require\(['"])(.*?)(?=['"]\))/g).test(line)) {
-            const req = line
-                .split(/(\("|\(')/g)
-                .pop()
-                .split(/("\)|'\))/g)[0];
+//     const content = fs.readFileSync(c.path).toString().split("\n");
 
-            if (!RegExp(/\.\.\/|\.\//g).test(req)) {
-                //What to ignore entirely
-                // "discord.js",
-                // "enmap",
-                // "chalk",
-                // "klaw"
+//     for (const line of content) {
+//         if (RegExp(/(= |=)(require\(['"])(.*?)(?=['"]\))/g).test(line)) {
+//             const req = line
+//                 .split(/(\("|\(')/g)
+//                 .pop()
+//                 .split(/("\)|'\))/g)[0];
 
-                console.log(req)
-            }
-        };
-    };
+//             if (!RegExp(/\.\.\/|\.\//g).test(req)) {
+//                 if (!["discord.js", "enmap", "chalk", "klaw"].includes("req")) {
+//                     cmdObj.requirements.push(req);
+//                 };
+//             };
+//         };
+//     };
 
-    // console.log(cmdObj);
-})
+//     if (cmdObj.requirements.length) {
+//         output.modules.push(cmdObj);
+//     };
+// }).on('end', () => {
+//     console.log(output)
+// });
 
 function finishLoading() {
     clearInterval(loading); //Stop the animation

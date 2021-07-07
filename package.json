@@ -12,6 +12,7 @@
     "chalk": "^4.1.0",
     "fs-extra": "^9.0.1",
     "klaw": "^3.0.0",
+    "list-requirements": "file:../../NPM Modules/list-requirements",
     "readline-sync": "^1.4.10",
     "system-commands": "^1.1.7"
   }
