@@ -16,11 +16,10 @@ const listRequirements = require("list-requirements");
 // }, 50);
 
 listRequirements("./Framework/Commands", {
-    outputLocation: "./",
     filters: [
         /fs/g,
-        /discord.js/g
-    ]
+        /(discord.js)/g
+    ],
 }).then(output => {
     console.log(output);
 });
