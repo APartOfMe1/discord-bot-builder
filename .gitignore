@@ -127,4 +127,7 @@ Framework/assets/downloads/mp3/*
 
 # Other asset folders
 Framework/assets/backups/*
-requirements.json
+builders/requirements.json
+
+# Ignore any output folder
+output/
